@@ -39,7 +39,7 @@ public class MainPageAppController {
         model.addAttribute("userData", currentUser);
         model.addAttribute("constantValue", ConstantsVariables.MINIMUM_TOKENS_FOR_CREATING_REQUEST);
         model.addAttribute("conditionCreateButton", questFacade.getStatusOFCreateQuestButton(currentUser));
-        if(!currentUser.getBadge().equals(BADGES.ADMIN.toString())) {
+        if(!currentUser.getUsername().equals("admin")) {
             userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(currentUser));
         }
         return MAIN_PAGE_APP;
