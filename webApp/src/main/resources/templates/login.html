@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/loginPage.css}" rel="stylesheet">
+    <title>Login Page</title>
+</head>
+<body>
+<h1>Please login!</h1>
+<form action="#" th:action="@{/requestLogin}" th:object="${loginForm}" method="post">
+    <table>
+        <tr>
+            <td>
+                <label for="username">Username</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{username}" id="username" placeholder="Insert username here"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('username')}"  >Username is not valid</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">Password</label>
+            </td>
+            <td>
+                <input type="password" th:field="*{password}" id="password" placeholder="Insert password here"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('password')}" >Password is not valid</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Submit">
+            </td>
+            <td>
+                <input type="reset" value="Reset fields">
+            </td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

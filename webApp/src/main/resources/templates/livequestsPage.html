@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:href="@{/livequestsPage.css}" rel="stylesheet">
+    <title>Quests Page</title>
+</head>
+<body>
+<h1>You can see here all available quests.Please select one:) </h1>
+<h2 th:align="center">Available quests!</h2>
+<center>
+    <table>
+        <thead>
+        <tr>
+            <th>Quest id</th>
+            <th>Created by</th>
+            <th>Badge</th>
+            <th>Start button</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="questModel : ${questDataList}">
+            <td th:text="${questModel.id}"></td>
+            <td th:text="${questModel.user.username}"></td>
+            <td th:text="${questModel.user.badge}"></td>
+            <td>
+                <a th:href="@{/mainPageApp/liveQuests/quest(id=${questModel.id})}">
+                    <button>Start the quest!</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</center>
+</body>
+</html>

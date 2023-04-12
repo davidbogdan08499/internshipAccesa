@@ -1,0 +1,54 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <link th:href="@{/createQuestPage.css}" rel="stylesheet">
+    <title>Create Request Page</title>
+</head>
+<body>
+<center>
+    <h1>Please create you new quest</h1>
+    <form th:action="@{/createQuest}" th:object="${questForm}" method="post">
+        <table>
+            <tr>
+                <td>Question:</td>
+                <td>
+                    <input type="text" th:field="*{question}" id="question" placeholder="Insert question here">
+                </td>
+            </tr>
+            <tr>
+                <td>Answer no.1:</td>
+                <td><input type="text" th:field="*{answerOne}" id="answerOne" placeholder="Insert first answer"></td>
+            </tr>
+            <tr>
+                <td>Answer no.2:</td>
+                <td><input type="text" th:field="*{answerTwo}" id="answerTwo" placeholder="Insert second answer"></td>
+            </tr>
+            <tr>
+                <td>Answer no.3:</td>
+                <td><input type="text" th:field="*{answerThree}" id="answerThree" placeholder="Insert second answer">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Correct answer:</p>
+                    <select th:field="*{idCorrectAnswer}">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit"/>
+                </td>
+                <td>
+                    <input type="reset" value="Reset fields">
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</center>
+</body>
+</html>

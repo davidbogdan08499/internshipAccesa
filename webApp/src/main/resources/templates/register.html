@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/registerPage.css}" rel="stylesheet">
+    <title>Register Page</title>
+</head>
+<body>
+<h1>Please register!</h1>
+<form action="#" th:action="@{/requestRegister}" th:object="${registerForm}" method="post">
+    <table>
+        <tr>
+            Insert your information in the following form.
+        </tr>
+        <tr>
+            <td>
+                <label for=username>Username</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{username}" id="username" placeholder="Insert username here"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">Password</label>
+            </td>
+            <td>
+                <input type="password" th:field="*{password}" id="password" placeholder="Insert password here"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="confirmPassword">Confirm Password</label>
+            </td>
+            <td>
+                <input type="password" th:field="*{confirmPassword}"
+                       id="confirmPassword" placeholder="Insert  confirm password here"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="mail">Mail</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{mail}" id="mail" placeholder="Insert mail here"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit">
+            </td>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <td>
+                <input type="reset" value="Reset fields">
+            </td>
+        </tr>
+
+    </table>
+
+</form>
+<p>
+
+</p>
+</body>
+</html>

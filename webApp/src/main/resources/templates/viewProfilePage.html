@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link th:href="@{/viewProfilePage.css}" rel="stylesheet">
+    <title>Profile Page</title>
+</head>
+<body>
+<center>
+<h1>Welcome to your profile page!</h1>
+<table>
+    <tr>
+        <td>Id:</td>
+        <td><p th:text="${userData.Id}"></p></td>
+    </tr>
+    <tr>
+        <td>Username:</td>
+        <td><p th:text="${userData.username}"></td>
+    </tr>
+    <tr>
+        <td>Mail:</td>
+        <td><p th:text="${userData.mail}"></td>
+    </tr>
+    <tr>
+        <td>Tokens:</td>
+        <td><p th:text="${userData.tokens}"></td>
+    </tr>
+    <tr>
+        <td>Badge:</td>
+        <td><p th:text="${userData.badge}"></td>
+    </tr>
+    <tr>
+        <td>Ranking:</td>
+        <td><p th:text="${rankOfUser}"></p></td>
+    </tr>
+</table>
+<table>
+   <thead>
+   <tr>
+       <th>Your created quests</th>
+   </tr>
+   </thead>
+    <tbody>
+   <tr th:each="item : ${userData.getQuestDataSet()}">
+       <td>Quest id:</td>
+     <td th:text="${item.id}"></td>
+    </tr>
+    </tbody>
+</table>
+</center>
+</body>
+</html>

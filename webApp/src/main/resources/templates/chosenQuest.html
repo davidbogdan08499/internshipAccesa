@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/chosenQuest.css}" rel="stylesheet">
+    <title>Chosen Quest</title>
+</head>
+<body>
+<h1>Welcome to your chosen quest!Good luck!:)</h1>
+<form th:action="@{/mainPageApp/liveQuests/quest}" th:object="${questAnswer}" method="post">
+    <table>
+        <tr>
+            <td>Question:</td>
+            <td><p th:text="${chosenQuest.question}"></p></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" th:text="${chosenQuest.answerOne}" th:field="*{questAnswerValue}" th:value="1">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" th:text="${chosenQuest.answerTwo}" th:field="*{questAnswerValue}" th:value="2">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" th:text="${chosenQuest.answerThree}" th:field="*{questAnswerValue}" th:value="3">
+            </td>
+        </tr>
+        <tr>
+            <td><input TYPE="submit" value="Submit"></td>
+            <td><input type="reset" value="Reset"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
