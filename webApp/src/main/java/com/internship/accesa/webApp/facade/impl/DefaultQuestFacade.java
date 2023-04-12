@@ -45,7 +45,7 @@ public class DefaultQuestFacade implements QuestFacade {
 
     @Override
     public boolean getStatusOFCreateQuestButton(UserData userData) {
-        if(userData.getBadge().equals(BADGES.ADMIN.toString())) return true;
+        if(userData.getBadge().toString().equals("ADMIN")) return true;
         return userData.getTokens() >= ConstantsVariables.MINIMUM_TOKENS_FOR_CREATING_REQUEST;
     }
 }

@@ -36,12 +36,10 @@ public class MainPageAppController {
             return HOME_PAGE;
         }
         UserData currentUser = (UserData) httpServletRequest.getSession().getAttribute("user");
+        userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(currentUser));
         model.addAttribute("userData", currentUser);
         model.addAttribute("constantValue", ConstantsVariables.MINIMUM_TOKENS_FOR_CREATING_REQUEST);
         model.addAttribute("conditionCreateButton", questFacade.getStatusOFCreateQuestButton(currentUser));
-        if(!currentUser.getUsername().equals("admin")) {
-            userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(currentUser));
-        }
         return MAIN_PAGE_APP;
     }
 

@@ -64,7 +64,10 @@ public class UserDAOImpl implements UserDAO {
     @Transactional
     public void modifyBadgeUser(UserModel userModel) {
         String badgeToChange;
-        if (userModel.getTokens() < 80) {
+        if(userModel.getUsername().equals("admin")){
+            userModel.setBadge(BADGES.ADMIN.toString());
+        }
+        else if (userModel.getTokens() < 80) {
             userModel.setBadge(BADGES.ENTHUSIAST.toString());
         } else if (userModel.getTokens() < 95) {
             userModel.setBadge(BADGES.DISCOVERER.toString());
