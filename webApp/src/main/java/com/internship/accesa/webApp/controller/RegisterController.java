@@ -5,6 +5,7 @@ import com.internship.accesa.webApp.facade.UserFacade;
 import com.internship.accesa.webApp.repository.model.UserModel;
 import com.internship.accesa.webApp.facade.exception.FacadeException;
 import com.internship.accesa.webApp.forms.BADGES;
+import com.internship.accesa.webApp.validator.RegisterFormValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -13,14 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
-import java.util.Base64;
 
 @Controller
 
@@ -33,11 +30,14 @@ public class RegisterController {
     private static final String MAIN_PAGE_APP = "redirect:";
 
 
-    private UserFacade userFacade;
+    private final UserFacade userFacade;
+
+    private final RegisterFormValidator registerFormValidator;
 
     @Autowired
-    public RegisterController(UserFacade userFacade) {
+    public RegisterController(UserFacade userFacade,RegisterFormValidator registerFormValidator) {
         this.userFacade = userFacade;
+        this.registerFormValidator = registerFormValidator;
     }
 
     @GetMapping("/register")
@@ -50,7 +50,13 @@ public class RegisterController {
     @PostMapping("/requestRegister")
     public String getAppMainPage(@Valid @ModelAttribute("registerForm") RegisterForm registerForm
             , BindingResult bindingResult
-            , HttpServletRequest httpServletRequest) throws NoSuchAlgorithmException, InvalidKeySpecException {
+            , HttpServletRequest httpServletRequest,Model model) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        registerFormValidator.validate(registerForm,bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute(registerForm);
+            return REGISTER_PAGE;
+        }
 
         final UserModel userModel = new UserModel();
         userModel.setQuestDataSet(new ArrayList<>());
@@ -59,7 +65,11 @@ public class RegisterController {
         userModel.setPassword(registerForm.getPassword());
         userModel.setConfirmPassword(registerForm.getConfirmPassword());
         userModel.setTokens(50);
-        userModel.setBadge(BADGES.ENTHUSIAST.toString());
+        if(userModel.getUsername().equals("admin")){
+            userModel.setBadge(BADGES.ADMIN.toString());
+        }else{
+            userModel.setBadge(BADGES.ENTHUSIAST.toString());
+        }
         try {
             userFacade.createUser(userModel);
             httpServletRequest.getSession().setAttribute("user", userFacade.getUserService().getUserDataFromUserModel(userModel));
@@ -85,6 +95,4 @@ public class RegisterController {
     }
 
      */
-
-
 }

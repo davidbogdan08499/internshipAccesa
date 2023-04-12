@@ -33,6 +33,9 @@
             <td><input type="reset" value="Reset"></td>
         </tr>
     </table>
+    <p th:if="${hasError}">
+        Quest answer is not correct. Please try again!
+    </p>
 </form>
 </body>
 </html>

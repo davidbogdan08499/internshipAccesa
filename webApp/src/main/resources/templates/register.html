@@ -17,6 +17,9 @@
             <td>
                 <input type="text" th:field="*{username}" id="username" placeholder="Insert username here"/>
             </td>
+            <td>
+                <p th:if="${#fields.hasErrors('username')}"  >Username is not valid</p>
+            </td>
         </tr>
         <tr>
             <td>
@@ -24,6 +27,9 @@
             </td>
             <td>
                 <input type="password" th:field="*{password}" id="password" placeholder="Insert password here"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('password')}"  >Password is not valid</p>
             </td>
         </tr>
         <tr>
@@ -34,6 +40,9 @@
                 <input type="password" th:field="*{confirmPassword}"
                        id="confirmPassword" placeholder="Insert  confirm password here"/>
             </td>
+            <td>
+                <p th:if="${#fields.hasErrors('confirmPassword')}"  > Confirm password is not valid</p>
+            </td>
         </tr>
         <tr>
             <td>
@@ -41,6 +50,9 @@
             </td>
             <td>
                 <input type="text" th:field="*{mail}" id="mail" placeholder="Insert mail here"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('mail')}"  >Mail is not valid</p>
             </td>
         </tr>
         <tr>

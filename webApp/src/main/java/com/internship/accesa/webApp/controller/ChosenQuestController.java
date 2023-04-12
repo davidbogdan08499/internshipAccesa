@@ -17,6 +17,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 
+import static com.internship.accesa.webApp.constants.ConstantsVariables.REDIRECT_PREFIX;
+
 @Controller
 public class ChosenQuestController {
 
@@ -44,19 +46,25 @@ public class ChosenQuestController {
     }
 
     @PostMapping("/mainPageApp/liveQuests/quest")
-    public RedirectView getResponseFromPage(HttpServletRequest httpServletRequest
-            , @Valid @ModelAttribute("questAnswer") QuestAnswer questAnswer) {
+    public String submitSolvedQuest(HttpServletRequest httpServletRequest
+            , @Valid @ModelAttribute("questAnswer") QuestAnswer questAnswer, Model model) {
         QuestData questChosen = (QuestData) httpServletRequest.getSession().getAttribute("chosenQuest");
         UserData currentUser = (UserData) httpServletRequest.getSession().getAttribute("user");
-        if (questAnswer.getQuestAnswerValue() == questChosen.getIdCorrectAnswer()) {
-            userFacade.modifyTokensUser(ConstantsVariables.NUMBER_OF_TOKENS_TO_MODIFY_FOR_CREATOR
-                    , questChosen.getUser().getId());
-            userFacade.modifyTokensUser(ConstantsVariables.NUMBER_OF_TOKENS_TO_MODIFY_FOR_RESOLVER
-                    , currentUser.getId());
-            userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(questChosen.getUser()));
-            userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(currentUser));
+        if (questAnswer.getQuestAnswerValue() != questChosen.getIdCorrectAnswer()) {
+            model.addAttribute("chosenQuest", questChosen);
+            model.addAttribute("questAnswer", questAnswer);
+            model.addAttribute("hasError",true);
+
+            return CHOSEN_QUEST_PAGE;
         }
 
-        return new RedirectView(URL_HOME_PAGE);
+        userFacade.modifyTokensUser(ConstantsVariables.NUMBER_OF_TOKENS_TO_MODIFY_FOR_CREATOR
+                , questChosen.getUser().getId());
+        userFacade.modifyTokensUser(ConstantsVariables.NUMBER_OF_TOKENS_TO_MODIFY_FOR_RESOLVER
+                , currentUser.getId());
+        userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(questChosen.getUser()));
+        userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(currentUser));
+
+        return REDIRECT_PREFIX + URL_HOME_PAGE;
     }
 }

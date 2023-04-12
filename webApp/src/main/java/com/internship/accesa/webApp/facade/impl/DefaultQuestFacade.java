@@ -4,6 +4,7 @@ import com.internship.accesa.webApp.constants.ConstantsVariables;
 import com.internship.accesa.webApp.facade.QuestFacade;
 import com.internship.accesa.webApp.facade.data.QuestData;
 import com.internship.accesa.webApp.facade.data.UserData;
+import com.internship.accesa.webApp.forms.BADGES;
 import com.internship.accesa.webApp.repository.model.QuestModel;
 import com.internship.accesa.webApp.service.QuestService;
 import org.springframework.stereotype.Component;
@@ -44,6 +45,7 @@ public class DefaultQuestFacade implements QuestFacade {
 
     @Override
     public boolean getStatusOFCreateQuestButton(UserData userData) {
+        if(userData.getBadge().equals(BADGES.ADMIN.toString())) return true;
         return userData.getTokens() >= ConstantsVariables.MINIMUM_TOKENS_FOR_CREATING_REQUEST;
     }
 }

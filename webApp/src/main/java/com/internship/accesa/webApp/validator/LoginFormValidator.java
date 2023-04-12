@@ -7,6 +7,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+/**
+ * Used to validate Login Form.
+ */
 @Component
 public class LoginFormValidator implements Validator {
 

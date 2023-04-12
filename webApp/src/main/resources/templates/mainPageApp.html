@@ -8,7 +8,7 @@
 <h1>Welcome to main page!</h1>
 <p>
     <a th:href="@{/viewProfile}"><button class="buttonViewProfile">ViewProfile</button></a>
-    <a th:href="@{/createQuest}" th:if="${userData.getTokens() >=constantValue && conditionCreateButton==true}"  th:method="get"><button class="buttonCreateQuests" th:id="creeateButtonAvailable">Create Quest</button></a>
+    <a th:href="@{/createQuest}" th:if="${conditionCreateButton==true}"  th:method="get"><button class="buttonCreateQuests" th:id="creeateButtonAvailable">Create Quest</button></a>
     <a th:href="@{/liveQuests}"><button class="buttonLiveQuests">Live Quests</button></a>
 </p>
 </center>

@@ -14,4 +14,8 @@ public class ConstantsVariables {
 
     public static final int NUMBER_OF_TOKENS_TO_MODIFY_FOR_RESOLVER=5;
     public static final String PASSWORD_ERROR_MESSAGE ="password.required" ;
+
+    public static final String CONFIRM_PASSWORD_ERROR_MESSAGE="confirmPassword.required";
+
+    public static final String MAIL_ERROR_MESSAGE="mail.required";
 }

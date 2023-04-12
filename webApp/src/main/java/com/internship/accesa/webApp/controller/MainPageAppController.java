@@ -6,6 +6,7 @@ import com.internship.accesa.webApp.facade.QuestFacade;
 import com.internship.accesa.webApp.facade.UserFacade;
 import com.internship.accesa.webApp.facade.data.QuestData;
 import com.internship.accesa.webApp.facade.data.UserData;
+import com.internship.accesa.webApp.forms.BADGES;
 import com.internship.accesa.webApp.repository.model.UserModel;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class MainPageAppController {
 
     @GetMapping()
     public String getMainPage(HttpServletRequest httpServletRequest, Model model) {
+
         if (httpServletRequest.getSession().getAttribute("user") == null) {
             return HOME_PAGE;
         }
@@ -37,7 +39,9 @@ public class MainPageAppController {
         model.addAttribute("userData", currentUser);
         model.addAttribute("constantValue", ConstantsVariables.MINIMUM_TOKENS_FOR_CREATING_REQUEST);
         model.addAttribute("conditionCreateButton", questFacade.getStatusOFCreateQuestButton(currentUser));
-        userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(currentUser));
+        if(!currentUser.getBadge().equals(BADGES.ADMIN.toString())) {
+            userFacade.modifyBadgeUser(userFacade.getUserService().getUserModelFromUserData(currentUser));
+        }
         return MAIN_PAGE_APP;
     }
 
